@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadAPI", "ThreadAPI\ThreadAPI.csproj", "{C2835986-F75C-4C4F-8AAD-EE0086071A5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThreadAPI", "ThreadAPI\ThreadAPI.csproj", "{C2835986-F75C-4C4F-8AAD-EE0086071A5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasks", "Tasks\Tasks.csproj", "{DDD552D4-E321-40B8-85BF-32556345443A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C2835986-F75C-4C4F-8AAD-EE0086071A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2835986-F75C-4C4F-8AAD-EE0086071A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2835986-F75C-4C4F-8AAD-EE0086071A5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDD552D4-E321-40B8-85BF-32556345443A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDD552D4-E321-40B8-85BF-32556345443A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDD552D4-E321-40B8-85BF-32556345443A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDD552D4-E321-40B8-85BF-32556345443A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
