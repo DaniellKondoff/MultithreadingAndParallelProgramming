@@ -14,9 +14,37 @@ namespace Tasks
             //Task<int> t1 = Task.Factory.StartNew(() => Print(cts.Token), cts.Token, TaskCreationOptions.DenyChildAttach | TaskCreationOptions.LongRunning, TaskScheduler.Default);
             //Task<int> t2 = Task.Factory.StartNew(() => Print(cts.Token), cts.Token);
 
+            NestedTasks();
 
-            Console.WriteLine("Main thred is not blocked!");
-            Console.Read();
+            //Console.WriteLine("Main thred is not blocked!");
+            //Console.Read();
+        }
+
+        private static void NestedTasks()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                Task nested = Task.Factory.StartNew(() => Console.WriteLine("Hello World"), TaskCreationOptions.AttachedToParent);
+            }).Wait();
+
+            Task t1 = new Task(() =>
+            {
+                //Task.Run(() => Console.WriteLine("Hello World 2")).Wait();
+                Task t2 = new Task(() => Console.WriteLine("Hello World 2"), TaskCreationOptions.AttachedToParent);
+                t2.Start();
+            });
+
+            t1.Start();
+
+            try
+            {
+                t1.Wait();
+            }
+            catch (AggregateException ae)
+            {
+
+                ae.Handle(a => true);
+            }
         }
 
         private static void WaitingTasks()
@@ -86,11 +114,13 @@ namespace Tasks
             Console.WriteLine($"T1: {t1.Status}");
             Console.WriteLine($"T2: {t3.Status}");
 
-           
+
         }
 
         private static int Print(CancellationToken token)
         {
+            //throw new InvalidOperationException();
+
             Console.WriteLine($"Is thread pool thread: {Thread.CurrentThread.IsThreadPoolThread}");
             int total = 0;
 
@@ -107,6 +137,31 @@ namespace Tasks
             }
 
             return total;
+        }
+
+        private static void ErrorHandling()
+        {
+            var t1 = Task.Run(() => Print(CancellationToken.None));
+
+            try
+            {
+
+                t1.Wait();
+            }
+            catch (AggregateException ae)
+            {
+
+                ae.Handle(e =>
+                {
+                    if (e is InvalidOperationException)
+                    {
+                        Console.WriteLine("Catch it!!!");
+                        return true;
+                    }
+                    else return false;
+                });
+
+            }
         }
     }
 }
